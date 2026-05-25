@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary: var(--theme-primary);
+  --color-primary-hover: var(--theme-primary-hover);
+  --color-primary-light: var(--theme-primary-light);
+  --color-secondary: var(--theme-secondary);
+  --color-accent: var(--theme-accent);
+  --color-dark: var(--theme-dark);
+  --color-dark-secondary: var(--theme-dark-secondary);
+  --color-dark-tertiary: var(--theme-dark-tertiary);
+  --color-surface: var(--theme-surface);
+  --color-surface-secondary: var(--theme-surface-secondary);
+  --color-border: var(--theme-border);
+  --color-text-primary: var(--theme-text-primary);
+  --color-text-secondary: var(--theme-text-secondary);
+  --color-text-muted: var(--theme-text-muted);
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+}
+
+/* Light theme (default) */
+:root {
+  --theme-primary: #6366f1;
+  --theme-primary-hover: #4f46e5;
+  --theme-primary-light: #eef2ff;
+  --theme-secondary: #8b5cf6;
+  --theme-accent: #06b6d4;
+  --theme-dark: #0f172a;
+  --theme-dark-secondary: #1e293b;
+  --theme-dark-tertiary: #334155;
+  --theme-surface: #ffffff;
+  --theme-surface-secondary: #f8fafc;
+  --theme-border: #e2e8f0;
+  --theme-text-primary: #0f172a;
+  --theme-text-secondary: #64748b;
+  --theme-text-muted: #94a3b8;
+}
+
+/* Dark theme */
+.dark {
+  --theme-primary: #818cf8;
+  --theme-primary-hover: #6366f1;
+  --theme-primary-light: #1e1b4b;
+  --theme-secondary: #a78bfa;
+  --theme-accent: #22d3ee;
+  --theme-dark: #0f172a;
+  --theme-dark-secondary: #1e293b;
+  --theme-dark-tertiary: #334155;
+  --theme-surface: #0f172a;
+  --theme-surface-secondary: #1e293b;
+  --theme-border: #334155;
+  --theme-text-primary: #f1f5f9;
+  --theme-text-secondary: #94a3b8;
+  --theme-text-muted: #64748b;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--theme-surface-secondary);
+  color: var(--theme-text-primary);
+}
+
+/* Smooth transitions for theme switch */
+*,
+*::before,
+*::after {
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* Override for animations that shouldn't be affected */
+.animate-spin,
+.animate-pulse,
+[class*="animate-"] {
+  transition: none !important;
+}
+
+/* Range input styling */
+input[type="range"] {
+  accent-color: var(--theme-primary);
+}
+
+/* Scrollbar styling for dark mode */
+.dark ::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: var(--theme-surface-secondary);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: var(--theme-border);
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: var(--theme-text-muted);
+}
