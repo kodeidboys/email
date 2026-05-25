@@ -1,21 +1,36 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation, Navigate } from 'react-router-dom';
 import { Sparkles, Eye, EyeOff, Mail, Lock } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 export default function Login() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { user, login } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
   const [form, setForm] = useState({ email: '', password: '' });
 
-  const handleSubmit = (e) => {
+  const from = location.state?.from?.pathname || '/';
+
+  // If already logged in, redirect to dashboard
+  if (user) {
+    return <Navigate to={from} replace />;
+  }
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
     setIsLoading(true);
-    // Simulate login — replace with real auth logic
-    setTimeout(() => {
+    try {
+      await login(form.email, form.password);
+      navigate(from, { replace: true });
+    } catch (err) {
+      setError(err.message);
+    } finally {
       setIsLoading(false);
-      navigate('/');
-    }, 1200);
+    }
   };
 
   return (
@@ -39,6 +54,13 @@ export default function Login() {
         {/* Login Card */}
         <div className="bg-surface border border-border rounded-2xl p-8 shadow-lg">
           <form onSubmit={handleSubmit} className="space-y-5">
+            {/* Error message */}
+            {error && (
+              <div className="bg-error/10 border border-error/30 text-error text-sm rounded-xl px-4 py-2.5">
+                {error}
+              </div>
+            )}
+
             {/* Email */}
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-text-primary mb-1.5">
