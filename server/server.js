@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const connectDB = require('./config/database');
+const { getConnectionStatus } = require('./config/database');
 
 // Import routes
 const authRoutes = require('./routes/authRoutes');
@@ -11,7 +12,7 @@ const imageRoutes = require('./routes/imageRoutes');
 // Initialize app
 const app = express();
 
-// Connect to database
+// Connect to database (non-blocking)
 connectDB();
 
 // Middleware
@@ -22,13 +23,29 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// API Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/images', imageRoutes);
+// DB check middleware for API routes
+const requireDB = (req, res, next) => {
+  if (!getConnectionStatus()) {
+    return res.status(503).json({ 
+      message: 'Database not connected. Please configure MONGODB_URI.',
+      demo: true 
+    });
+  }
+  next();
+};
 
-// Health check
+// API Routes (require DB)
+app.use('/api/auth', requireDB, authRoutes);
+app.use('/api/images', requireDB, imageRoutes);
+
+// Health check (always works)
 app.get('/health', (req, res) => {
-  res.json({ status: 'ok', message: 'AIPIK Studio API is running' });
+  res.json({ 
+    status: 'ok', 
+    message: 'AIPIK Studio API is running',
+    database: getConnectionStatus() ? 'connected' : 'not configured',
+    version: '1.0.0'
+  });
 });
 
 // Serve frontend static files in production
@@ -36,7 +53,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/dist')));
 
   // SPA fallback - any unmatched route serves index.html
-  app.get('*', (req, res) => {
+  app.get('{*path}', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/dist', 'index.html'));
   });
 }
