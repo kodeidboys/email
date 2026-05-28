@@ -1,0 +1,109 @@
+{
+  "categories": {
+    "windows": { "name": "Windows OS", "icon": "🪟" },
+    "office": { "name": "Microsoft Office", "icon": "📊" },
+    "antivirus": { "name": "Antivirus", "icon": "🛡️" },
+    "software": { "name": "Software Lain", "icon": "💻" }
+  },
+  "products": [
+    {
+      "id": "win11pro",
+      "name": "Windows 11 Pro",
+      "category": "windows",
+      "price": 35000,
+      "original_price": 150000,
+      "description": "Lisensi Windows 11 Professional - Lifetime",
+      "features": ["Aktivasi永久 (lifetime)", "Support update", "1 device"],
+      "stock": 999,
+      "active": true
+    },
+    {
+      "id": "win10pro",
+      "name": "Windows 10 Pro",
+      "category": "windows",
+      "price": 30000,
+      "original_price": 130000,
+      "description": "Lisensi Windows 10 Professional - Lifetime",
+      "features": ["Aktivasi永久 (lifetime)", "Support update", "1 device"],
+      "stock": 999,
+      "active": true
+    },
+    {
+      "id": "office21pro",
+      "name": "Office 2021 Pro Plus",
+      "category": "office",
+      "price": 45000,
+      "original_price": 250000,
+      "description": "Lisensi Microsoft Office 2021 Professional Plus",
+      "features": ["Word, Excel, PPT, Outlook, Access", "Lifetime", "1 PC"],
+      "stock": 999,
+      "active": true
+    },
+    {
+      "id": "office19pro",
+      "name": "Office 2019 Pro Plus",
+      "category": "office",
+      "price": 35000,
+      "original_price": 200000,
+      "description": "Lisensi Microsoft Office 2019 Professional Plus",
+      "features": ["Word, Excel, PPT, Outlook", "Lifetime", "1 PC"],
+      "stock": 999,
+      "active": true
+    },
+    {
+      "id": "office24pro",
+      "name": "Office 2024 Pro Plus",
+      "category": "office",
+      "price": 55000,
+      "original_price": 350000,
+      "description": "Lisensi Microsoft Office 2024 Professional Plus (Terbaru!)",
+      "features": ["Word, Excel, PPT, Outlook, Access", "Lifetime", "1 PC"],
+      "stock": 999,
+      "active": true
+    },
+    {
+      "id": "kaspersky",
+      "name": "Kaspersky Internet Security 1yr",
+      "category": "antivirus",
+      "price": 40000,
+      "original_price": 200000,
+      "description": "Kaspersky Internet Security 1 Tahun",
+      "features": ["1 device - 1 tahun", "Antivirus + VPN + Parental"],
+      "stock": 999,
+      "active": true
+    },
+    {
+      "id": "eset",
+      "name": "ESET NOD32 Antivirus 1yr",
+      "category": "antivirus",
+      "price": 35000,
+      "original_price": 180000,
+      "description": "ESET NOD32 Antivirus 1 Tahun",
+      "features": ["1 device - 1 tahun", "Ringan & cepat"],
+      "stock": 999,
+      "active": true
+    },
+    {
+      "id": "visio21",
+      "name": "Visio 2021 Professional",
+      "category": "software",
+      "price": 50000,
+      "original_price": 300000,
+      "description": "Microsoft Visio 2021 Professional",
+      "features": ["Lifetime", "1 PC"],
+      "stock": 999,
+      "active": true
+    },
+    {
+      "id": "project21",
+      "name": "Project 2021 Professional",
+      "category": "software",
+      "price": 50000,
+      "original_price": 300000,
+      "description": "Microsoft Project 2021 Professional",
+      "features": ["Lifetime", "1 PC"],
+      "stock": 999,
+      "active": true
+    }
+  ]
+}

@@ -23,6 +23,19 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// ─── TELEGRAM BOT ───────────────────────────────
+if (process.env.BOT_TOKEN) {
+  try {
+    const { webhookHandler } = require('../bot');
+    app.use('/bot', express.raw({ type: 'application/json' }), webhookHandler);
+    console.log('🤖 KodeID Store Bot attached to /bot');
+  } catch (e) {
+    console.log('⚠️  Bot not loaded:', e.message);
+  }
+} else {
+  console.log('ℹ️  No BOT_TOKEN set — bot disabled. Set BOT_TOKEN + set webhook to use.');
+}
+
 // DB check middleware for API routes
 const requireDB = (req, res, next) => {
   if (!getConnectionStatus()) {
@@ -44,6 +57,7 @@ app.get('/health', (req, res) => {
     status: 'ok', 
     message: 'AIPIK Studio API is running',
     database: getConnectionStatus() ? 'connected' : 'not configured',
+    bot: process.env.BOT_TOKEN ? '✅ configured' : '❌ not set',
     version: '1.0.0'
   });
 });
